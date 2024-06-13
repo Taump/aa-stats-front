@@ -26,8 +26,15 @@ export const getDefinitionData = async (
   try {
     return apiGet<IDefinition>(doc_url);
   } catch (e) {
-    if (e instanceof Error) throw new Error(e.message);
-    throw new Error('getDefinitionData error');
+    if (e instanceof Error) {
+      console.error('getDefinitionData error', e.message);
+    } else {
+      console.error('getDefinitionData error');
+    }
+
+    return {
+      description: '',
+    };
   }
 };
 
@@ -62,8 +69,13 @@ export const getDocUrl = async (
     if ('doc_url' in res[1]) return res[1].doc_url;
     return '';
   } catch (e) {
-    if (e instanceof Error) throw new Error(e.message);
-    throw new Error('getDocUrl error');
+    if (e instanceof Error) {
+      console.log('getDocUrl error', e.message);
+    } else {
+      console.log('getDocUrl error');
+    }
+
+    return '';
   }
 };
 
@@ -269,7 +281,12 @@ export const getSymbol = async (
   client: Client
 ): Promise<string> => {
   const registry = client.api.getOfficialTokenRegistryAddress();
-  const symbol = await client.api.getSymbolByAsset(registry, asset);
+  let symbol = '';
+
+  if (!isBot) {
+    symbol = await client.api.getSymbolByAsset(registry, asset);
+  }
+
   return symbol;
 };
 
