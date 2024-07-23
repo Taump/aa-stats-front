@@ -50,11 +50,11 @@ export const templates: ITemplate[] = [
       let stateVars;
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined).catch(() => ({}));
       } else {
         stateVars = await client.api.getAaStateVars({
           address: curve_aa,
-        });
+        }).catch(() => ({}));
       }
 
       const { asset2 = '' } = stateVars as { asset2: string };
@@ -82,11 +82,11 @@ export const templates: ITemplate[] = [
       let stateVars;
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
         stateVars = await client.api.getAaStateVars({
           address,
-        });
+        }).catch(() => ({}));
       }
 
       const { asset2 = '' } = stateVars as { asset2: string };
@@ -104,11 +104,11 @@ export const templates: ITemplate[] = [
       let stateVars;
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
         stateVars = await client.api.getAaStateVars({
           address,
-        });
+        }).catch(() => ({}));
       }
       const { asset2 = '' } = stateVars as { asset2: string };
       return { asset2 };
@@ -122,11 +122,11 @@ export const templates: ITemplate[] = [
       let stateVars;
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
         stateVars = await client.api.getAaStateVars({
           address,
-        });
+        }).catch(() => ({}));
       }
 
       const { asset = '' } = stateVars as { asset: string };
@@ -148,15 +148,13 @@ export const templates: ITemplate[] = [
 
       if (isBot) {
         [stateVars, curveDef] = await Promise.all([
-          ObyteHttpService.getAaStateVars(curve_aa, undefined),
-          ObyteHttpService.getDefinition(curve_aa),
+          ObyteHttpService.getAaStateVars(curve_aa, undefined).catch(() => ({})),
+          ObyteHttpService.getDefinition(curve_aa).catch(() => []),
         ]);
       } else {
         [stateVars, curveDef] = await Promise.all([
-          client.api.getAaStateVars({
-            address: curve_aa,
-          }),
-          client.api.getDefinition(curve_aa),
+          client.api.getAaStateVars({ address: curve_aa }).catch(() => ({})),
+          client.api.getDefinition(curve_aa).catch(() => []),
         ]);
       }
 
@@ -176,13 +174,13 @@ export const templates: ITemplate[] = [
 
       if (isBot) {
         [stateVars, stateVarsCurveAA] = await Promise.all([
-          ObyteHttpService.getAaStateVars(address, undefined),
-          ObyteHttpService.getAaStateVars(curve_aa, undefined),
+          ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({})),
+          ObyteHttpService.getAaStateVars(curve_aa, undefined).catch(() => ({})),
         ]);
       } else {
         [stateVars, stateVarsCurveAA] = await Promise.all([
-          client.api.getAaStateVars({ address }),
-          client.api.getAaStateVars({ address: curve_aa }),
+          client.api.getAaStateVars({ address }).catch(() => ({})),
+          client.api.getAaStateVars({ address: curve_aa }).catch(() => ({})),
         ]);
       }
 
@@ -200,9 +198,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address });
+        stateVars = await client.api.getAaStateVars({ address }).catch(() => ({}));
       }
 
       const { shares_asset = '' } = stateVars as { shares_asset: string };
@@ -233,9 +231,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address });
+        stateVars = await client.api.getAaStateVars({ address }).catch(() => ({}));
       }
 
       const { shares_asset = '' } = stateVars as { shares_asset: string };
@@ -257,9 +255,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address: curve_aa });
+        stateVars = await client.api.getAaStateVars({ address: curve_aa }).catch(() => ({}));
       }
 
       const { asset2 = '' } = stateVars as { asset2: string };
@@ -274,9 +272,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address });
+        stateVars = await client.api.getAaStateVars({ address }).catch(() => ({}));
       }
 
       const { asset = '' } = stateVars as { asset: string };
@@ -294,9 +292,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address });
+        stateVars = await client.api.getAaStateVars({ address }).catch(() => ({}));
       }
 
       const { yes_asset = '' } = stateVars as { yes_asset: string };
@@ -314,9 +312,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(import_aa, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(import_aa, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address: import_aa });
+        stateVars = await client.api.getAaStateVars({ address: import_aa }).catch(() => ({}));
       }
 
       const { asset = '' } = stateVars as { asset: string };
@@ -337,9 +335,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(curve_aa, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address: curve_aa });
+        stateVars = await client.api.getAaStateVars({ address: curve_aa }).catch(() => ({}));
       }
 
       const { asset2 = '' } = stateVars as { asset2: string };
@@ -357,9 +355,9 @@ export const templates: ITemplate[] = [
       let stateVars = {};
 
       if (isBot) {
-        stateVars = await ObyteHttpService.getAaStateVars(address, undefined);
+        stateVars = await ObyteHttpService.getAaStateVars(address, undefined).catch(() => ({}));
       } else {
-        stateVars = await client.api.getAaStateVars({ address });
+        stateVars = await client.api.getAaStateVars({ address }).catch(() => ({}));
       }
 
       const { asset = '' } = stateVars as { asset: string };

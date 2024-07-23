@@ -106,9 +106,9 @@ export const getAddressesBaseAA = async (
       let definition;
 
       if (isBot) {
-        definition = await ObyteHttpService.getDefinition(address);
+        definition = await ObyteHttpService.getDefinition(address).catch(()=> []);
       } else {
-        definition = await client.api.getDefinition(address);
+        definition = await client.api.getDefinition(address).catch(()=> []);;
       }
 
       if (Object.hasOwn(definition[1], 'base_aa')) {
